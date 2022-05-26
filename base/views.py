@@ -1,5 +1,6 @@
 from email import message
 from multiprocessing import context
+from pydoc_data.topics import topics
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -100,7 +101,11 @@ def room(request, pk):
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
-    context = {'user': user, 'rooms': rooms}
+    room_messages = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {'user': user, 'rooms': rooms, 
+               'room_messages': room_messages, 
+               'topics': topics}
     return render(request, 'base/profile.html', context)
 
 
