@@ -17,8 +17,7 @@
       <li>{{message}}</li>
       {% endfor %}
     </ul>
-    {% endif %} {% block content %} {% endblock content %} {% comment %}
-    <script src="script.js"></script>
-    {% endcomment %}
+    {% endif %} {% block content %} {% endblock content %}
+    <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>
