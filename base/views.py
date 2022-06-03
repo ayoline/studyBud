@@ -193,3 +193,8 @@ def updateUser(request):
             return redirect('user-profile', pk=user.id)
 
     return render(request, 'base/update-user.html', {'form': form})
+
+
+def topicsPage(request):
+    topics = Topic.objects.filter()
+    return render(request, 'base/topics.html', {'topics':topics})

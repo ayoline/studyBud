@@ -2,6 +2,7 @@
 <main class="auth layout">
 
   {% if page == 'login' %}
+
   <div class="container">
     <div class="layout__box">
       <div class="layout__boxHeader">
@@ -42,32 +43,33 @@
 
         <div class="auth__action">
           <p>Haven't signed up yet?</p>
-          <a href="signup.html" class="btn btn--link">Sign Up</a>
+          <a href="{% url 'register' %}" class="btn btn--link">Sign Up</a>
         </div>
       </div>
     </div>
   </div>
+
   {% else %}
+
   <div class="container">
     <div class="layout__box">
       <div class="layout__boxHeader">
         <div class="layout__boxTitle">
-          <h3>Login</h3>
+          <h3>Register</h3>
         </div>
       </div>
       <div class="layout__body">
         <h2 class="auth__tagline">Find your study partner</h2>
 
-        <form class="form" action="#">
+        <form class="form" method="POST" action="">
+          {% csrf_token %}
+
+          {% for field in form %}
           <div class="form__group form__group">
-            <label for="room_name">Username</label>
-            <input id="username" name="username" type="text" placeholder="e.g. dennis_ivy" />
+            <label for="room_name">{{field.label}}</label>
+            {{field}}
           </div>
-          <div class="form__group">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password"
-                   placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" />
-          </div>
+          {% endfor %}
 
           <button class="btn btn--main" type="submit">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
@@ -81,13 +83,13 @@
               </path>
             </svg>
 
-            Login
+            Register
           </button>
         </form>
 
         <div class="auth__action">
-          <p>Haven't signed up yet?</p>
-          <a href="signup.html" class="btn btn--link">Sign Up</a>
+          <p>Already signed up yet?</p>
+          <a href="{% url 'login' %}" class="btn btn--link">Sign Up</a>
         </div>
       </div>
     </div>
